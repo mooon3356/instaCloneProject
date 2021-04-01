@@ -1,4 +1,45 @@
-.button {
-  width: 50px;
-  height: 50px;
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+  width: 100vw;
+  height: 100vh;
 }
+
+div {
+  margin-bottom: 10px;
+}
+
+input {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.title {
+  font-size: 50px;
+  font-family: sans-serif;
+}
+
+.loginButton {
+  color: black;
+  font-weight: bold;
+  background-color: rgb(17, 142, 224);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* vw(viewpoint)는 %와 비슷하다 */
