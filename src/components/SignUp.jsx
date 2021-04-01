@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React , {useState} from 'react'
-
+import { Link } from "react-router-dom";
 const SignUp = () => {
 
     let data = [];
@@ -28,15 +28,25 @@ const SignUp = () => {
         }
     }
 
+    const send = (userInfo) => {
+        fetch('http://localhost:3000',{
+         method: 'POST',
+         body: JSON.stringify(userInfo),
+         headers : {
+             'Content-Type': 'application/json'
+         },
+     })
+     .then(res => res.json())
+     .then(json => json)
+ }
+
     const handleSubmit = (e) => {
        // 서버에 전송 후, userInfo를 초기화
-       e.preventDefault()
-       data.push(userInfo)
-       console.log(data)
+        send(userInfo)
     }
-    
-    return (
-        <div className="body">
+   
+   return (
+       <div className="body">
             <div className="stage">  {/* 회원가입 폼 감싸있는 태그 */}
                 <div className="title">Instagram</div>
                 <div>친구들의 사진과 동영상을 보려면 가입하세요.</div>
@@ -51,16 +61,29 @@ const SignUp = () => {
                     {data}
                 </form>
                 <div>가입하면 instagram의 약관, 데이터 정책 및 쿠키 정책에 동의하게 됩니다.</div>
-                <div>계정이 있으신가요? 로그인</div>
+                <div>
+                    계정이 있으신가요? <Link to ="/">로그인</Link>
+                </div>
                 <div>앱을 다운로드하세요.</div>
                 <div className="downLoadLink">
                     <button>App Store에서 다운로드 하기</button><button>구글 플레이</button>
                 </div>
-                <fotter></fotter>
+                <footer>개요</footer>  
             </div>
-
+            
         </div>
     )
 }
 
 export default SignUp
+// const requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: JSON.stringify(data),
+//   redirect: 'follow'
+// };
+
+// fetch('http://localhost:3000/', requestOptions)
+//   .then(response => response.json())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));

@@ -1,12 +1,29 @@
 import React from 'react';
 import './app.css';
 import SignUp from './components/SignUp';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SignIn from './components/SignIn';
+
+// 1. route의 기능
+// 2. browserRouter, hashRouter의 기능
+// 3. Switch의 기능
+// 4. useHistory,useParams 기능
+
 
 function App() {
   return (
-  <div>
-    <SignUp />
-  </div>
+     <Router>
+      <Switch>
+        <Route exact={true} path="/">
+          <SignIn />   
+        </Route>
+    
+  <Route  path ="/SignUp">
+      <SignUp />    
+    </Route>
+    </Switch>
+     </Router>
+  
   )
 }
 
@@ -22,3 +39,5 @@ export default App;
 
 
 //1. 로그인 창 구현
+
+// react-router-dom
