@@ -1,30 +1,69 @@
 /*eslint-disable*/
 import React , {useState} from 'react'
 import { Link } from "react-router-dom";
+
+
+const emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+const idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+const pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+const userNamePattern =  /^[가-힣]{2,4}$/;
+const phonePattern = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
+
 const SignUp = () => {
 
     let data = [];
     let [userInfo,setUserInfo]= useState({email : null, userName : null, userId : null, password : null });
-    
+    const [email, setEmail] = useState(null)
+    const [userName, setUserName] = useState(null)
+    const [userID, setUserID] = useState(null)
+    const [password, setPassword] = useState(null)
 
+    
     const handleUserInfo = (value, name) => {
         let copyUserInfo = {...userInfo}
+
         
         if(name === "email"){
-            copyUserInfo.email = value
-            setUserInfo({...copyUserInfo})
+            console.log(emailPattern.test(value))
+            if(emailPattern.test(value) === true || phonePattern.test(value) === true){
+                copyUserInfo.email = value
+                setUserInfo({...copyUserInfo})
+                setEmail('✓')
+            } else {
+                if(emailPattern.test(value) === false){   
+                    setEmail('❌')
+                }
+                if(phonePattern.test(value) === false){
+                    setEmail('❌')
+                }
+            }
         }
         else if(name === "userName"){
-        copyUserInfo.userName = value
-            setUserInfo({...copyUserInfo})
+            if(userNamePattern.test(value) === true) {
+              copyUserInfo.userName = value
+              setUserInfo({...copyUserInfo}) 
+              setUserName('✓')
+            } else {
+               setUserName('❌')
+            }
         }
         else if(name === "userId") {
-            copyUserInfo.userId = value
-            setUserInfo({...copyUserInfo})
+            if(idPattern.test(value)) {
+              copyUserInfo.userId = value
+              setUserInfo({...copyUserInfo})
+              setUserID('✓')
+            } else {
+                setUserID('❌')
+            }
         }
         else if(name === "password") {
-            copyUserInfo.password = value
-            setUserInfo({...copyUserInfo})
+            if(pwPattern.test(value) === true){
+              copyUserInfo.password = value
+              setUserInfo({...copyUserInfo})
+              setPassword('✓')
+            }else{
+              setPassword('❌')
+            }
         }
     }
 
@@ -53,10 +92,27 @@ const SignUp = () => {
                 <button className="loginButton">facebook으로 로그인</button>
                 <div>------ 또는 ------</div>
                 <form className="form" onSubmit={handleSubmit} name = "loginform" >
-                    <input placeholder="휴대폰 번호 또는 이메일 주소" name="email" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
-                    <input placeholder="성명" name="userName" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
-                    <input placeholder="사용자 이름" name="userId" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
-                    <input placeholder="비밀번호" name="password" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
+                    <div>
+                        <input placeholder="휴대폰 번호 또는 이메일 주소" name="email" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
+                        {/* {email === true ? <span className = "check">{'✓'}</span> : <span style={{display: 'none'}} className = "fail">{'❌'}</span> }  */}
+                        <span>{email}</span>
+                    </div>
+                    <div>
+                        <input placeholder="성명" name="userName" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
+                        {/* {email === true ? <span className = "check">{'✓'}</span> : <span style={{display: 'none'}} className = "fail">{'❌'}</span> }  */}
+                        <span>{userName}</span>
+                    </div>
+                    <div>
+                      <input placeholder="사용자 이름" name="userId" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
+                        {/* {email === true ? <span className = "check">{'✓'}</span> : <span style={{display: 'none'}} className = "fail">{'❌'}</span> }  */}
+                        <span>{userID}</span>
+                    </div>
+                    <div>
+                        <input type = "password" placeholder="비밀번호" name="password" onChange={(e) => {handleUserInfo(e.target.value, e.target.name)}}></input>
+                        {/* {email === true ? <span className = "check">{'✓'}</span> : <span style={{display: 'none'}} className = "fail">{'❌'}</span> }  */}
+                        <span>{password}</span>
+                    </div>
+                    
                     <button type="submit" >가입</button>
                     {data}
                 </form>
@@ -66,7 +122,13 @@ const SignUp = () => {
                 </div>
                 <div>앱을 다운로드하세요.</div>
                 <div className="downLoadLink">
-                    <button>App Store에서 다운로드 하기</button><button>구글 플레이</button>
+                    <a>
+                    <img src = {"https://www.millie.co.kr/common/images/common/icon-app-strore-badge.png"} width = "150" height = "100" />
+                    </a>
+                    <a>
+                    <img src = {"https://play.google.com/intl/ko/badges/static/images/badges/ko_badge_web_generic.png"} width = "150" height = "110" />
+                    </a>
+                    {/* <button >App Store에서 다운로드 하기</button><button>구글 플레이</button> */}
                 </div>
                 <footer>개요</footer>  
             </div>

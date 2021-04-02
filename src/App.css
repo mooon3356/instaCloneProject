@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
 .body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: beige;
+  background-color: white;
   width: 100vw;
   height: 100vh;
 }
@@ -13,23 +19,28 @@ div {
 }
 
 input {
+  border: 1px solid lightgray;
   margin-bottom: 10px;
-  width: 200px;
+  width: 300px;
   height: 30px;
   border-radius: 5px;
+  padding: 10px;
 }
 
 .stage {
+  width: 350px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   padding: 5px;
 }
 
 .title {
+  margin: 40px;
   font-size: 50px;
-  font-family: sans-serif;
+  font-family: "Dancing Script", cursive;
 }
 
 .loginButton {
@@ -43,4 +54,31 @@ input {
   flex-direction: column;
 }
 
+.question_account {
+  border: 1px solid lightgray;
+  width: 350px;
+  text-align: center;
+  padding: 15px;
+}
+
+.question_password {
+  color: rgb(37, 40, 225);
+}
 /* vw(viewpoint)는 %와 비슷하다 */
+
+.line {
+  display: inline-block;
+  width: 100px;
+  border-bottom: 1px solid lightgray;
+  margin-top: 30px;
+}
+
+.loginWith {
+  margin-bottom: 30px;
+}
+
+.or {
+  margin: 10px;
+  font-size: 15px;
+  color: gray;
+}
