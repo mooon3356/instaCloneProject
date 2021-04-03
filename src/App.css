@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+input {
+  border: 1px solid lightgray;
+  margin-bottom: 10px;
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 18px;
+}
+
 .body {
   display: flex;
   flex-direction: column;
@@ -14,20 +23,7 @@
   height: 100vh;
 }
 
-div {
-  margin-bottom: 10px;
-}
-
-input {
-  border: 1px solid lightgray;
-  margin-bottom: 10px;
-  width: 300px;
-  height: 30px;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.stage {
+.signIn_stage {
   width: 350px;
   height: 450px;
   display: flex;
@@ -37,16 +33,27 @@ input {
   padding: 5px;
 }
 
-.title {
+.signUp_stage {
+  width: 350px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+.signIn_title {
   margin: 40px;
   font-size: 50px;
   font-family: "Dancing Script", cursive;
 }
 
-.loginButton {
-  color: black;
-  font-weight: bold;
-  background-color: rgb(17, 142, 224);
+.signUp_title {
+  margin: 20px;
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-family: "Dancing Script", cursive;
 }
 
 .form {
@@ -59,12 +66,23 @@ input {
   width: 350px;
   text-align: center;
   padding: 15px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.question_account_text {
+  margin-right: 10px;
+}
+
+.question_account_signup {
+  font-weight: bolder;
+  color: rgb(53, 130, 237);
+  text-decoration: none;
 }
 
 .question_password {
-  color: rgb(37, 40, 225);
+  color: rgb(18, 20, 144);
 }
-/* vw(viewpoint)는 %와 비슷하다 */
 
 .line {
   display: inline-block;
@@ -73,12 +91,63 @@ input {
   margin-top: 30px;
 }
 
-.loginWith {
-  margin-bottom: 30px;
-}
-
 .or {
   margin: 10px;
   font-size: 15px;
   color: gray;
+}
+
+.mainStage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainTitle {
+  font-size: 70px;
+  font-family: "Dancing Script", cursive;
+}
+
+.smallTitle {
+  font-size: 18px;
+  color: gray;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.inputs {
+  display: flex;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.policy {
+  text-align: center;
+  margin: 10px;
+  color: gray;
+}
+
+.question_account_login {
+  border: 1px solid gray;
+  padding: 20px;
+  width: 350px;
+  text-align: center;
+  border: 1px solid lightgray;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.login {
+  text-decoration: none;
+  color: rgb(53, 130, 237);
+  font-weight: bolder;
+}
+
+.valid {
+  margin-left: 10px;
 }
