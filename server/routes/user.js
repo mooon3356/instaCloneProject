@@ -12,6 +12,6 @@ router.post('/signin', usersController.signin.post);
 // router.post('/signout', usersController.signout.post);
 
 // * get /users/userinfo
-// router.get('/user', usersController.user.get);
+router.get('/user', usersController.user.get);
 
 module.exports = router;

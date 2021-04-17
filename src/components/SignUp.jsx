@@ -9,6 +9,13 @@ const pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 const userNamePattern = /^[가-힣]{2,4}$/;
 const phonePattern = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
 
+// var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+//       var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+//       var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+//       var phonePattern = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
+
+
+
 const SignUp = () => {
   // 회원가입 컴포넌트
   let [userInfo, setUserInfo] = useState({

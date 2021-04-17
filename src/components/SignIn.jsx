@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import Modal from "react-modal";
 import FacebookLogin from "react-facebook-login";
 import { Button } from "@material-ui/core";
+const axios = require("axios");
+
 // import { Button } from 'react-bootstrap';
 
 //목표: 정보들을 전송 시, 데이터 안의 정보들과 비교하여 ID 값과 비밀번호 값이 같다면, 로그인 성공 화면을 보여준다.
@@ -19,20 +21,34 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // .then((res) => {
+  //   this.props.loginHandler(true);
+  //   return axios.get('https://localhost:4000/users/userinfo', {
+  //     withCredentials: true,
+  //   });
+  // })
+
   // 로그인 버튼 클릭 시, 실행되는 코드
   const handleSubmit = (e) => {
-    fetch(`http://localhost:3000/${email}/${password}`)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        if (result === true) {
-          console.log("result is true");
-          history.push("/main"); //history.push를 사용하여 내가 원하는 경로 창으로 이동
-        } else {
-          alert("로그인 정보가 틀렸습니다.");
-        }
+    axios
+      .post(
+        "https://localhost:4000/signin",
+        {
+          email: email,
+          password: password,
+        },
+        { "Content-Type": "application/json", withCredentials: true }
+      )
+      .then((res) => {
+        history.push("/main")
+        return axios
+          .get("https://localhost:4000/user", {
+            withCredentials: true,
+          })
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
       })
-      .catch((error) => console.log("error", error));
+      .catch((err) => alert('제대로 입력해주세요.'));
   };
 
   // input들에 태그에 변화가 일어나면, 실행되는 코드
@@ -109,3 +125,41 @@ export default SignIn;
 // const responseFacebook = (response) => { // Facebook 로그인 api를 사용하기 위한 코드
 //   console.log(response);
 // };
+
+// https://serverless-stack.com/chapters/redirect-on-login-and-logout.html
+// 스택오버플로우
+// What is the best way to redirect a page using react-router
+//
+// https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
+
+// 기존 요청 코드
+// fetch(`http://localhost:3000/${email}/${password}`) // 이메일, 패스워드를 보내는 방식을 바꿔야됨
+//       .then((response) => response.json())
+//       .then((result) => {
+//         console.log(result);
+//         if (result === true) {
+//           console.log("result is true");
+//           history.push("/main"); //history.push를 사용하여 내가 원하는 경로 창으로 이동
+//         } else {
+//           alert("로그인 정보가 틀렸습니다.");
+//         }
+//       })
+//       .catch((error) => console.log("error", error));
+
+//
+
+// axios
+//       .post(
+//         "https://localhost:4000/signin",
+//         {
+//           email: email,
+//           password: password,
+//         },
+//         { "Content-Type": "application/json", withCredentials: true }
+//       )
+//       .then((res) => {
+//         return axios.get("https://localhost:4000/user", {
+//           withCredentials: true,
+//         });
+//       })
+//       .catch((err) => alert(err));

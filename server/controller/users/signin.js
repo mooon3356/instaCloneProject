@@ -17,15 +17,18 @@ module.exports = {
             where: { email: req.body.email, password: req.body.password },
           });
 
-          console.log(req.session)
+          console.log(userInfo)
+
+        //   console.log(req.session)
           if(!userInfo) {
-              res.status(400).send('로그인 못함')
+              res.status(400).send({message:'로그인 못함'})
           }
           else{
-            //   req.session.save(function () {
-                //   req.session.userId = userInfo.username
+              req.session.save(function () {
+                  req.session.username = userInfo.username
+                //   console.log(req.session)
                   res.status(200).send({data: userInfo})
-            //   })
+              })
           }
 
     }

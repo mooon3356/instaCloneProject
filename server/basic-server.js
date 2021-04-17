@@ -1,28 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const session = require('express-session');
+const logger = require('morgan');
 const https = require('https')
 const fs = require('fs')
 const usersRouter = require('./routes/user')
-const session = require('express-session');
-const logger = require('morgan');
 
 const app = express();
-app.use(logger('dev'));
-app.use(express.urlencoded({ extended: false }));
-
-app.use(express.json()); // express에서 제공하는 json 화 시켜주는 코드
-
-app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'OPTION'],
-  credentials: true,
-}));
-
-
-app.use('/',usersRouter);
-//이거의 용도?
-
-//로그인 버튼 누를 시, 서버 데이터 안의 정보들과 비교하여 응답을 해주는 코드
 
 app.use(
   session({
@@ -39,6 +23,22 @@ app.use(
     },
   })
 );
+app.use(logger('dev'));
+app.use(express.json()); // express에서 제공하는 json 화 시켜주는 코드
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'OPTION'],
+  credentials: true,
+}));
+
+
+app.use('/',usersRouter);
+//이거의 용도?
+
+//로그인 버튼 누를 시, 서버 데이터 안의 정보들과 비교하여 응답을 해주는 코드
+
 
 
 //https 서버 생성.
