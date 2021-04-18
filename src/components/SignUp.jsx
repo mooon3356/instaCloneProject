@@ -1,7 +1,8 @@
 /*eslint-disable*/
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import axios from "axios";
 
 const emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 const idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
@@ -14,10 +15,9 @@ const phonePattern = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
 //       var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 //       var phonePattern = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
 
-
-
 const SignUp = () => {
   // 회원가입 컴포넌트
+  const history = useHistory();
   let [userInfo, setUserInfo] = useState({
     email: null,
     userName: null,
@@ -35,10 +35,7 @@ const SignUp = () => {
 
     if (name === "email") {
       console.log(emailPattern.test(value));
-      if (
-        emailPattern.test(value) === true ||
-        phonePattern.test(value) === true
-      ) {
+      if (emailPattern.test(value) === true || phonePattern.test(value) === true) {
         copyUserInfo.email = value;
         setUserInfo({ ...copyUserInfo });
         setEmail("✓");
@@ -79,25 +76,23 @@ const SignUp = () => {
 
   // 서버에 요청보내는 코드
   const send = (userInfo) => {
-    fetch("http://localhost:3000", {
-      method: "POST",
-      body: JSON.stringify(userInfo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => json);
+    axios
+      .post("https://localhost:4000/signup", {
+        email: userInfo.email,
+        password: userInfo.password,
+        username: userInfo.userName,
+        mobile: "010-4386-1234",
+      })
+      .then((res) => {
+        console.log("hi");
+        history.push("/");
+      });
   };
 
   // 회원가입 정보들 전송하는 코드
   const handleSubmit = (e) => {
-    if (
-      email === "✓" &&
-      userName === "✓" &&
-      userId === "✓" &&
-      password === "✓"
-    ) {
+    if (email === "✓" && userName === "✓" && userId === "✓" && password === "✓") {
+      e.preventDefault();
       console.log("send is going to be use");
       send(userInfo);
     } else {
@@ -169,10 +164,7 @@ const SignUp = () => {
             Sign Up
           </Button>
         </form>
-        <div className="policy">
-          By signing up, you agree to our Terms , Data Policy and Cookies
-          Policy.
-        </div>
+        <div className="policy">By signing up, you agree to our Terms , Data Policy and Cookies Policy.</div>
       </div>
       <div className="question_account_login">
         Have an account?{" "}
@@ -187,3 +179,15 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+const send = (userInfo) => {
+  fetch("http://localhost:3000", {
+    method: "POST",
+    body: JSON.stringify(userInfo),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((json) => json);
+};

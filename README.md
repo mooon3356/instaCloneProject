@@ -60,6 +60,7 @@ DATABASE 이용하여 로그인 인증 구현
 
   1. 각 기능에 맞는 AJAX 요청 구현 
   axios.fetch구현. js를 사용해서 서버에 요청하는 것이다.
+  
 
 
 
@@ -85,26 +86,19 @@ DATABASE 이용하여 로그인 인증 구현
   기억할 것들
 
   1. npx sequelize-cli db:migrate:undo
-  db:migrate:undo,이 명령은 가장 최근 마이그레이션을 되돌립니다..
+   가장 최근 마이그레이션을 되돌린다.
   
   2. seeders
   - seeder 만드는 명령어 -> npx sequelize-cli seed:generate --name demo-user
   - 데이터베이스에 seeders를 넣어주는 명령어 -> npx sequelize-cli db:seed:all
   - 마이그레이트 명령어를 실행해서 테이블을 먼저 생성한 후, seeders를 넣어줘야 됨
 
- 의문점 - 1. create model 할때 primary key 수기로 작성해야 하는것인가? createAt updateAt mirgartion 폴더에 명령어 쓰지도 않았는데 왜생기지? 
-        2. seeder 파일에 id를 써줘야하는 이유??
-        3. cors에 h 빼면 되는 이유 뭐지?
-
- 3. models의 user.js 파일에 id의 primaryKey를 따로 설정해주었다.
+  3. models의 user.js 파일에 id의 primaryKey를 따로 설정해주었다.
 
 
+  의문점
+ 1. create model 할때 primary key 수기로 작성해야 하는것인가? createAt updateAt mirgartion 폴더에 명령어 쓰지도 않았는데 왜생기지? 
+ 2. seeder 파일에 id를 써줘야하는 이유??
+ 3. cors에 h 빼면 되는 이유 뭐지?
 
 
-
-
-
-
-sequelize model:create --name tasks --force --attributes "task_id:{type:integer, primaryKey: true,autoIncrement:
-true}, title:string,description:text, data_type:text, shift:string, date:date, start_time:time, end_time:time, type:string, location:string, visible_to_helpe
-rs:date, reminders_to_helpers:integer, created_date:time, modified_date:time"
